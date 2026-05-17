@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VECoders Tech Club</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="intro-screen" id="introScreen">
+    <div class="logo-circle" id="logoCircle">
+      <img src="https://img.icons8.com/ios-filled/100/ffffff/code.png" alt="Club Logo" class="club-logo" />
+    </div>
+    <div class="intro-content">
+      <h1>VECoders Technical Club</h1>
+      <p>Innovate. Collaborate. Build together.</p>
+      <button id="enterButton" class="btn">Enter the Hub</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">VECoders</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#videos">Videos</a>
+      <a href="#events">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#members">Members</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn" id="loginBtn">Login</button>
+      <button class="btn btn-secondary" id="registerBtn">Register</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <h2>Welcome to the college technical club.</h2>
+        <p>Build projects, learn skills, lead events, and join a community that makes tech happen.</p>
+        <div class="hero-actions">
+          <button class="btn" id="openLogin">Login</button>
+          <button class="btn btn-secondary" id="openRegister">Register</button>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-card">
+          <h3>Latest Update</h3>
+          <p id="latestUpdate">Loading club news...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="section-header">
+        <h2>Club News</h2>
+        <button class="btn btn-small" id="addNewsBtn">Post Update</button>
+      </div>
+      <div class="cards-grid" id="newsFeed"></div>
+    </section>
+
+    <section class="section" id="videos">
+      <h2>Featured Videos</h2>
+      <div class="video-grid">
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" allowfullscreen></iframe>
+          <p>Club Project Showcase</p>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/3JWTaaS7LdU" title="Video 2" allowfullscreen></iframe>
+          <p>Workshop Highlights</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="section-header">
+        <h2>Past Events</h2>
+        <button class="btn btn-small" id="submitIdeaBtn">Submit Idea</button>
+      </div>
+      <div class="row" id="eventsList"></div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-header">
+        <h2>Gallery</h2>
+        <button class="btn btn-small" id="addPhotoBtn">Add Photo</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <section class="section" id="members">
+      <div class="section-header">
+        <h2>Club Leadership & Coordinators</h2>
+        <div></div>
+      </div>
+      <div class="leadership-grid">
+        <div class="leader-card">
+          <h3>President</h3>
+          <p>Ashwin Patel</p>
+        </div>
+        <div class="leader-card">
+          <h3>Vice-President</h3>
+          <p>Priya Sharma</p>
+        </div>
+        <div class="leader-card">
+          <h3>Secretary</h3>
+          <p>Rohit Verma</p>
+        </div>
+        <div class="leader-card">
+          <h3>Vice-Secretary</h3>
+          <p>Neha Singh</p>
+        </div>
+      </div>
+      <div class="team-info">
+        <div>
+          <h4>Club Head</h4>
+          <p>Dr. S. K. Mehta</p>
+        </div>
+        <div>
+          <h4>Coordinator</h4>
+          <p>Ms. Anjali Rao</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>VECoders Technical Club · All access controlled by authorized members.</p>
+  </footer>
+
+  <div class="modal hidden" id="loginModal">
+    <div class="modal-panel">
+      <button class="close-btn" data-close="loginModal">✕</button>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label>Register Number<input type="text" id="loginRegNo" placeholder="12-digit registration no" required pattern="\d{12}" maxlength="12" /></label>
+        <label>Password<input type="password" id="loginPassword" placeholder="Password" required /></label>
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <p>New here? <button class="link-btn" id="switchToRegister">Register as student / staff</button></p>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="registerModal">
+    <div class="modal-panel">
+      <button class="close-btn" data-close="registerModal">✕</button>
+      <h2>Register</h2>
+      <form id="registerForm">
+        <label>Full Name<input type="text" id="regName" required /></label>
+        <label>Register Number<input type="text" id="regNumber" placeholder="12-digit registration no" required maxlength="12" pattern="\d{12}" /></label>
+        <label>Year<select id="regYear" required>
+          <option value="">Select year</option>
+          <option>1st Year</option>
+          <option>2nd Year</option>
+          <option>3rd Year</option>
+          <option>4th Year</option>
+        </select></label>
+        <label>Role<select id="regRole" required>
+          <option value="">Select role</option>
+          <option value="student">Student</option>
+          <option value="staff">Staff</option>
+          <option value="volunteer">Volunteer</option>
+          <option value="president">President</option>
+          <option value="vice-president">Vice-President</option>
+          <option value="secretary">Secretary</option>
+          <option value="vice-secretary">Vice-Secretary</option>
+        </select></label>
+        <label>Skills<textarea id="regSkills" placeholder="Coding, design, robotics, etc." rows="2"></textarea></label>
+        <label>About You<textarea id="regAbout" placeholder="Tell us more about yourself" rows="3"></textarea></label>
+        <label>Password<input type="password" id="regPassword" required minlength="6" /></label>
+        <button type="submit" class="btn">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="newsModal">
+    <div class="modal-panel">
+      <button class="close-btn" data-close="newsModal">✕</button>
+      <h2>Post News</h2>
+      <form id="newsForm">
+        <label>Headline<input type="text" id="newsTitle" required /></label>
+        <label>Details<textarea id="newsBody" rows="4" required></textarea></label>
+        <button type="submit" class="btn">Publish</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="photoModal">
+    <div class="modal-panel">
+      <button class="close-btn" data-close="photoModal">✕</button>
+      <h2>Add Gallery Photo</h2>
+      <form id="photoForm">
+        <label>Image URL<input type="url" id="photoUrl" required placeholder="https://example.com/photo.jpg" /></label>
+        <label>Description<input type="text" id="photoDesc" required /></label>
+        <button type="submit" class="btn">Add Image</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="ideaModal">
+    <div class="modal-panel">
+      <button class="close-btn" data-close="ideaModal">✕</button>
+      <h2>Submit Event Idea</h2>
+      <form id="ideaForm">
+        <label>Idea Title<input type="text" id="ideaTitle" required /></label>
+        <label>Idea Description<textarea id="ideaDesc" rows="4" required></textarea></label>
+        <button type="submit" class="btn">Submit Idea</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="status-bar hidden" id="statusBar"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
